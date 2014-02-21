@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ssaunier/colissimo.png)](https://travis-ci.org/ssaunier/colissimo)
+
 # Colissimo
 
 This gem allows you to retrieve tracking information from French Colissimo
@@ -15,7 +17,6 @@ tracking_code = "6C07437595437"
 
 rows = Colissimo::Tracker.new(tracking_code).tracking_rows
 
-```ruby
 output == "<table>"
 rows.each do |row|
   output += "  <tr>"
