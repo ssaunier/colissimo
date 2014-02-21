@@ -1,29 +1,38 @@
 # Colissimo
 
-TODO: Write a gem description
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'colissimo'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install colissimo
+This gem allows you to retrieve tracking information from French Colissimo
+parcel delivery company. Unfortunatelly you won't get this information in
+a text format, but in an image format. That's fine for display though.
 
 ## Usage
 
-TODO: Write usage instructions here
+Add the `colissimo` gem to your `Gemfile`, run the `bundle` command.
 
-## Contributing
+```ruby
+require "colissimo"
 
-1. Fork it ( http://github.com/<my-github-username>/colissimo/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+tracking_code = "6C07437595437"
+
+rows = Colissimo::Tracker.new(tracking_code).tracking_rows
+
+```ruby
+output == "<table>"
+rows.each do |row|
+  output += "  <tr>"
+  output += "    <td><img src='#{row.date_base64_png}' /></td>"
+  output += "    <td><img src='#{row.label_base64_png}' /></td>"
+  output += "    <td><img src='#{row.localization_base64_png}' /></td>"
+  output += "  </tr>"
+end
+output += "</table>"
+
+```
+
+If you are interested in just the latest status, you can save some bandwidth
+witht this option:
+
+
+```ruby
+Colissimo::Tracker.new(tracking_code).tracking_rows(:latest_only => true)
+
+```
