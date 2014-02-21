@@ -17,7 +17,7 @@ tracking_code = "6C07437595437"
 
 rows = Colissimo::Tracker.new(tracking_code).tracking_rows
 
-output == "<table>"
+output = "<table>"
 rows.each do |row|
   output += "  <tr>"
   output += "    <td><img src='#{row.date_base64_png}' /></td>"
